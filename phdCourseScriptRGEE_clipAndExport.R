@@ -9,11 +9,13 @@ studyArea = ee$FeatureCollection("projects/spatial-logic-417507/assets/studyArea
 canopy_height_clipped = canopy_height$clip(studyArea)
 
 task_img <- ee_image_to_drive(
-  image = canopy_height_clipped,
+  image = canopy_height,
   fileFormat = "GEO_TIFF",
-  region = studyArea,
+  region = studyArea$geometry(),
   fileNamePrefix = "my_image_demo",
   scale = 1000
 )
 task_img$start()
+
+
 ee_monitoring(task_img)
